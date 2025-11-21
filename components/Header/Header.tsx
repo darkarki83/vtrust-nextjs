@@ -21,20 +21,25 @@ export default function Header() {
           <a href="#faq" className="text-[15px] font-medium text-[var(--text)]">FAQ</a>
           <a href="#download" className="text-[15px] font-medium text-[var(--text)]">Get Started</a>
         </nav>
-        {/* Mobile menu button only */}
-        <button
-          className="block max-[560px]:block min-[561px]:hidden p-2 rounded-md border border-[var(--brand)] bg-white"
-          aria-label="Open menu"
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--brand)]">
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <line x1="3" y1="12" x2="21" y2="12" />
-            <line x1="3" y1="18" x2="21" y2="18" />
-          </svg>
-        </button>
+        {/* Mobile menu button and Get Started button side by side */}
+        <div className="flex items-center gap-2 min-[561px]:hidden">
+          <a href="#download" className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-[10px] bg-gradient-to-br from-[var(--brand)] to-[var(--brand-2)] text-white font-semibold text-xs transition-all duration-200 whitespace-nowrap shadow hover:scale-105">
+            Get Started
+          </a>
+          <button
+            className="block p-2 rounded-md border border-[var(--brand)] bg-white"
+            aria-label="Open menu"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--brand)]">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
       </div>
-      {/* Mobile menu overlay with links */}
+      {/* Mobile menu overlay with links (no Get Started) */}
       {menuOpen && (
         <nav className="fixed top-16 left-0 w-full z-50 bg-white shadow-lg max-[560px]:block hidden">
           <div className="flex flex-col items-center gap-4 py-6">
@@ -42,7 +47,6 @@ export default function Header() {
             <a href="#how" className="text-[17px] font-semibold text-[var(--text)]" onClick={() => setMenuOpen(false)}>How it works</a>
             <a href="#tutorial" className="text-[17px] font-semibold text-[var(--text)]" onClick={() => setMenuOpen(false)}>Tutorial</a>
             <a href="#faq" className="text-[17px] font-semibold text-[var(--text)]" onClick={() => setMenuOpen(false)}>FAQ</a>
-            <a href="#download" className="text-[17px] font-semibold text-[var(--text)]" onClick={() => setMenuOpen(false)}>Get Started</a>
           </div>
         </nav>
       )}
