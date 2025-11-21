@@ -40,7 +40,6 @@ export default function Features() {
   const maxIndex = features.length - cardsPerPage;
 
   // Responsive check
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 560;
 
   return (
     <section id="features" className="py-24 max-[980px]:py-16 max-[560px]:py-12 bg-white scroll-mt-20">

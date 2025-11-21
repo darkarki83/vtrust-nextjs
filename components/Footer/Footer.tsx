@@ -10,9 +10,9 @@ export default function Footer() {
           © {currentYear} VTrust. Built for safer freelance deals.
         </div>
         <div className="flex gap-3.5 opacity-90">
-          <a href="#" className="hover:text-[var(--brand)]">Privacy</a>
-          <a href="#" className="hover:text-[var(--brand)]">Terms</a>
-          <a href="#" className="hover:text-[var(--brand)]">Contact</a>
+          <button type="button" className="hover:text-[var(--brand)] bg-transparent border-none p-0 cursor-pointer">Privacy</button>
+          <a href="/terms" className="hover:text-[var(--brand)]">Terms</a>
+          <button type="button" className="hover:text-[var(--brand)] bg-transparent border-none p-0 cursor-pointer">Contact</button>
         </div>
       </div>
     </footer>

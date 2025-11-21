@@ -7,7 +7,7 @@ export default function Header() {
     <header className="sticky top-0 z-40 bg-white/95 border-b border-[rgba(234,234,241,0.5)] shadow-sm" style={{ backdropFilter: 'saturate(180%) blur(12px)' }}>
       <div className="max-w-[1200px] mx-auto px-4 max-[560px]:px-3 flex items-center justify-between h-[70px] max-[560px]:h-16">
         <a
-          href="#"
+          href="/"
           className="flex gap-2.5 items-center font-extrabold tracking-wide transition-transform duration-200 hover:scale-[1.02]"
           aria-label="VTrust logo"
         >
@@ -19,13 +19,23 @@ export default function Header() {
           <a href="#how" className="text-[15px] font-medium text-[var(--text)]">How it works</a>
           <a href="#tutorial" className="text-[15px] font-medium text-[var(--text)]">Tutorial</a>
           <a href="#faq" className="text-[15px] font-medium text-[var(--text)]">FAQ</a>
-          <a href="#download" className="text-[15px] font-medium text-[var(--text)]">Get Started</a>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[var(--brand)] text-white font-semibold text-sm transition-all duration-200 whitespace-nowrap shadow hover:bg-[var(--brand-2)] hover:scale-105 border-none"
+            onClick={() => globalThis.location.hash = '#download'}
+          >
+            Get Started
+          </button>
         </nav>
         {/* Mobile menu button and Get Started button side by side */}
         <div className="flex items-center gap-2 min-[561px]:hidden">
-          <a href="#download" className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-[10px] bg-gradient-to-br from-[var(--brand)] to-[var(--brand-2)] text-white font-semibold text-xs transition-all duration-200 whitespace-nowrap shadow hover:scale-105">
+          <button
+            type="button"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[var(--brand)] text-white font-semibold text-sm transition-all duration-200 whitespace-nowrap shadow hover:bg-[var(--brand-2)] hover:scale-105 border-none"
+            onClick={() => globalThis.location.hash = '#download'}
+          >
             Get Started
-          </a>
+          </button>
           <button
             className="block p-2 rounded-md border border-[var(--brand)] bg-white"
             aria-label="Open menu"
