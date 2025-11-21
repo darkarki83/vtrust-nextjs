@@ -1,6 +1,8 @@
-'use client';
+"use client";
+import React, { useState } from 'react';
 
 export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className="sticky top-0 z-40 bg-white/95 border-b border-[rgba(234,234,241,0.5)] shadow-sm" style={{ backdropFilter: 'saturate(180%) blur(12px)' }}>
       <div className="max-w-[1200px] mx-auto px-4 max-[560px]:px-3 flex items-center justify-between h-[70px] max-[560px]:h-16">
@@ -11,27 +13,39 @@ export default function Header() {
         >
           <img className="h-10 max-[560px]:h-8 block object-contain" src="/logo/logo_transparent.png" alt="VTrust" />
         </a>
-        <nav className="flex gap-8 max-[980px]:gap-3 items-center">
-          <a href="#features" className="text-[15px] font-medium text-[var(--text)] opacity-85 transition-all duration-200 relative hover:opacity-100 hover:text-[var(--brand)] after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[var(--brand)] after:transition-[width] after:duration-300 hover:after:w-full max-[980px]:hidden">
-            Features
-          </a>
-          <a href="#how" className="text-[15px] font-medium text-[var(--text)] opacity-85 transition-all duration-200 relative hover:opacity-100 hover:text-[var(--brand)] after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[var(--brand)] after:transition-[width] after:duration-300 hover:after:w-full max-[980px]:hidden">
-            How it works
-          </a>
-          <a href="#tutorial" className="text-[15px] font-medium text-[var(--text)] opacity-85 transition-all duration-200 relative hover:opacity-100 hover:text-[var(--brand)] after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[var(--brand)] after:transition-[width] after:duration-300 hover:after:w-full max-[980px]:hidden">
-            Tutorial
-          </a>
-          <a href="#faq" className="text-[15px] font-medium text-[var(--text)] opacity-85 transition-all duration-200 relative hover:opacity-100 hover:text-[var(--brand)] after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-[var(--brand)] after:transition-[width] after:duration-300 hover:after:w-full max-[980px]:hidden">
-            FAQ
-          </a>
-          <a
-            href="#download"
-            className="inline-flex items-center justify-center gap-2 px-6 max-[560px]:px-4 py-2.5 max-[560px]:py-2 rounded-[10px] bg-gradient-to-br from-[var(--brand)] to-[var(--brand-2)] text-white font-semibold text-sm max-[560px]:text-xs transition-all duration-200 whitespace-nowrap shadow-[0_2px_8px_rgba(139,92,246,0.3)] hover:shadow-[0_4px_16px_rgba(139,92,246,0.4)] hover:-translate-y-px hover:scale-[1.02]"
-          >
-            Get Started
-          </a>
+        {/* Desktop nav hidden on mobile */}
+        <nav className="flex gap-8 max-[980px]:gap-3 items-center max-[560px]:hidden">
+          <a href="#features" className="text-[15px] font-medium text-[var(--text)]">Features</a>
+          <a href="#how" className="text-[15px] font-medium text-[var(--text)]">How it works</a>
+          <a href="#tutorial" className="text-[15px] font-medium text-[var(--text)]">Tutorial</a>
+          <a href="#faq" className="text-[15px] font-medium text-[var(--text)]">FAQ</a>
+          <a href="#download" className="text-[15px] font-medium text-[var(--text)]">Get Started</a>
         </nav>
+        {/* Mobile menu button only */}
+        <button
+          className="block max-[560px]:block min-[561px]:hidden p-2 rounded-md border border-[var(--brand)] bg-white"
+          aria-label="Open menu"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--brand)]">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
       </div>
+      {/* Mobile menu overlay with links */}
+      {menuOpen && (
+        <nav className="fixed top-16 left-0 w-full z-50 bg-white shadow-lg max-[560px]:block hidden">
+          <div className="flex flex-col items-center gap-4 py-6">
+            <a href="#features" className="text-[17px] font-semibold text-[var(--text)]" onClick={() => setMenuOpen(false)}>Features</a>
+            <a href="#how" className="text-[17px] font-semibold text-[var(--text)]" onClick={() => setMenuOpen(false)}>How it works</a>
+            <a href="#tutorial" className="text-[17px] font-semibold text-[var(--text)]" onClick={() => setMenuOpen(false)}>Tutorial</a>
+            <a href="#faq" className="text-[17px] font-semibold text-[var(--text)]" onClick={() => setMenuOpen(false)}>FAQ</a>
+            <a href="#download" className="text-[17px] font-semibold text-[var(--text)]" onClick={() => setMenuOpen(false)}>Get Started</a>
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
