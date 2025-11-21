@@ -1,4 +1,33 @@
-'use client';
+"use client";
+
+import React, { useState } from 'react';
+
+function MobileFAQ({ faqs }: { readonly faqs: ReadonlyArray<{ question: string; answer: string }> }) {
+  const [showAll, setShowAll] = useState(false);
+  const visibleFaqs = showAll ? faqs : faqs.slice(0, 2);
+  return (
+    <div className="max-[560px]:block hidden">
+      {visibleFaqs.map((faq) => (
+        <details key={faq.question} className="mb-4 p-5 border-2 border-[#e5e5e5] rounded-2xl bg-white transition-all duration-300 hover:border-[var(--brand)] hover:shadow-[0_4px_20px_rgba(139,92,246,0.1)] open:border-[var(--brand)]">
+          <summary className="cursor-pointer font-semibold text-[16px] select-none text-[var(--text)] hover:text-[var(--brand)] px-2 py-3 rounded-xl">
+            {faq.question}
+          </summary>
+          <p className="text-[var(--muted)] mt-3 pt-2 leading-relaxed text-[14px]">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
+      {!showAll && faqs.length > 2 && (
+        <button
+          className="block w-full py-2 mt-2 rounded-xl bg-[#8b5cf6] text-white font-semibold text-base"
+          onClick={() => setShowAll(true)}
+        >
+          Show more
+        </button>
+      )}
+    </div>
+  );
+}
 
 export default function FAQ() {
   const faqs = [
@@ -36,9 +65,12 @@ export default function FAQ() {
     <section id="faq" className="py-24 bg-[#fafafa] scroll-mt-20">
       <div className="max-w-[1200px] mx-auto px-6">
         <h2 className="text-center mb-14 text-[42px] font-bold text-[var(--text)]">FAQ</h2>
-        <div className="grid grid-cols-2 max-[980px]:grid-cols-1 gap-5 max-w-[1000px] mx-auto">
-          {faqs.map((faq, index) => (
-            <details key={index} className="p-6 border-2 border-[#e5e5e5] rounded-2xl bg-white transition-all duration-300 hover:border-[var(--brand)] hover:shadow-[0_4px_20px_rgba(139,92,246,0.1)] open:border-[var(--brand)]">
+        {/* Mobile: show 2 items, reveal more on button click */}
+        <MobileFAQ faqs={faqs} />
+        {/* Desktop/tablet grid */}
+        <div className="grid grid-cols-2 max-[980px]:grid-cols-1 max-[560px]:hidden gap-5 max-w-[1000px] mx-auto">
+          {faqs.map((faq) => (
+            <details key={faq.question} className="p-6 border-2 border-[#e5e5e5] rounded-2xl bg-white transition-all duration-300 hover:border-[var(--brand)] hover:shadow-[0_4px_20px_rgba(139,92,246,0.1)] open:border-[var(--brand)]">
               <summary className="cursor-pointer font-semibold text-[17px] select-none text-[var(--text)] hover:text-[var(--brand)]">
                 {faq.question}
               </summary>
