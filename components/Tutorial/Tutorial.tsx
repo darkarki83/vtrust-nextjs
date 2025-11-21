@@ -1,7 +1,5 @@
 'use client';
 
-import styles from './Tutorial.module.css';
-
 export default function Tutorial() {
   const tutorials = [
     {
@@ -22,47 +20,57 @@ export default function Tutorial() {
   ];
 
   return (
-    <section id="tutorial" className={styles.section}>
-      <div className="wrap">
-        <h2 className={styles.title}>Learn Vtrust in Minutes</h2>
-        <p className={styles.subtitle}>
+    <section id="tutorial" className="py-24 max-[980px]:py-20 max-[560px]:py-14 bg-white scroll-mt-20">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <h2 className="text-center mb-4 text-[42px] max-[980px]:text-[36px] max-[560px]:text-[32px] text-[var(--text)] font-bold">
+          Learn Vtrust in Minutes
+        </h2>
+        <p className="text-center text-[var(--muted)] text-lg max-w-[700px] mx-auto mb-14 leading-relaxed">
           Master the platform with our interactive step-by-step tutorials. Quick, easy, and designed to get you started fast.
         </p>
 
-        <div className={styles.grid}>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] max-[560px]:grid-cols-1 gap-6 mb-14">
           {tutorials.map((tutorial) => (
             <div
               key={tutorial.title}
-              className={styles.card}
+              className="relative overflow-hidden rounded-2xl bg-white border border-[#f0f0f0] shadow-[0_4px_12px_rgba(0,0,0,0.05)] transition-all duration-300 text-left w-full hover:shadow-[0_12px_40px_rgba(139,92,246,0.15)] hover:-translate-y-1"
             >
-              <div className={styles.thumbnail}>
-                <div className={styles.overlay}></div>
-                <div className={styles.playButton}>
-                  <div>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <div className="relative h-[200px] max-[980px]:h-[180px] bg-gradient-to-br from-[#8b5cf6] to-[#7c3aed] overflow-hidden group">
+                <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/30"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 bg-white/95 rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(0,0,0,0.2)] transition-all duration-300 group-hover:scale-110">
+                    <svg className="w-7 h-7 text-[#8b5cf6] ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polygon points="5 3 19 12 5 21 5 3"></polygon>
                     </svg>
                   </div>
                 </div>
               </div>
-              <div className={styles.cardContent}>
-                <div className={styles.badge}>{tutorial.level}</div>
-                <h4 className={styles.cardTitle}>{tutorial.title}</h4>
-                <p className={styles.cardDescription}>{tutorial.description}</p>
-                <div className={styles.cardFooter}>
-                  <span className={styles.watchLink}>Video Coming Soon →</span>
+              <div className="p-5 max-[560px]:p-4">
+                <div className="inline-block px-3 py-1 rounded-xl text-xs font-semibold bg-[#d1fae5] text-[#047857] mb-3">
+                  {tutorial.level}
+                </div>
+                <h4 className="text-lg font-semibold text-[var(--text)] mb-2 transition-colors duration-300">
+                  {tutorial.title}
+                </h4>
+                <p className="text-sm text-[var(--muted)] leading-relaxed mb-4 line-clamp-2">
+                  {tutorial.description}
+                </p>
+                <div className="pt-4 border-t border-[#f0f0f0]">
+                  <span className="text-sm font-semibold text-[#8b5cf6] transition-all duration-300">
+                    Video Coming Soon →
+                  </span>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className={styles.ctaContainer}>
+        <div className="text-center mt-12">
           <a
             href="https://vtrust-dashboard.vercel.app/sign-in"
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.ctaButton}
+            className="inline-block px-8 py-3.5 bg-gradient-to-br from-[#8b5cf6] to-[#7c3aed] text-white font-semibold text-base rounded-xl shadow-[0_4px_16px_rgba(139,92,246,0.3)] transition-all duration-300 hover:shadow-[0_8px_24px_rgba(139,92,246,0.4)] hover:-translate-y-0.5"
           >
             Start Your Journey
           </a>
