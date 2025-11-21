@@ -3,28 +3,45 @@
 import React, { useState } from 'react';
 
 function MobileFAQ({ faqs }: { readonly faqs: ReadonlyArray<{ question: string; answer: string }> }) {
-  const [showAll, setShowAll] = useState(false);
-  const visibleFaqs = showAll ? faqs : faqs.slice(0, 2);
+  const [startIdx, setStartIdx] = useState(0);
+  const itemsPerPage = 2;
+  const endIdx = startIdx + itemsPerPage;
+  const visibleFaqs = faqs.slice(startIdx, endIdx);
+  const canGoLeft = startIdx > 0;
+  const canGoRight = endIdx < faqs.length;
+
   return (
     <div className="max-[560px]:block hidden">
-      {visibleFaqs.map((faq) => (
-        <details key={faq.question} className="mb-4 p-5 border-2 border-[#e5e5e5] rounded-2xl bg-white transition-all duration-300 hover:border-[var(--brand)] hover:shadow-[0_4px_20px_rgba(139,92,246,0.1)] open:border-[var(--brand)]">
-          <summary className="cursor-pointer font-semibold text-[16px] select-none text-[var(--text)] hover:text-[var(--brand)] px-2 py-3 rounded-xl">
-            {faq.question}
-          </summary>
-          <p className="text-[var(--muted)] mt-3 pt-2 leading-relaxed text-[14px]">
-            {faq.answer}
-          </p>
-        </details>
-      ))}
-      {!showAll && faqs.length > 2 && (
+      <div className="flex flex-col gap-4">
+        {visibleFaqs.map((faq) => (
+          <details key={faq.question} className="mb-0 p-5 border-2 border-[#e5e5e5] rounded-2xl bg-white transition-all duration-300 hover:border-[var(--brand)] hover:shadow-[0_4px_20px_rgba(139,92,246,0.1)] open:border-[var(--brand)]">
+            <summary className="cursor-pointer font-semibold text-[16px] select-none text-[var(--text)] hover:text-[var(--brand)] px-2 py-3 rounded-xl">
+              {faq.question}
+            </summary>
+            <p className="text-[var(--muted)] mt-3 pt-2 leading-relaxed text-[14px]">
+              {faq.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+      <div className="flex items-center justify-center gap-6 mt-4">
         <button
-          className="block w-full py-2 mt-2 rounded-xl bg-[#8b5cf6] text-white font-semibold text-base"
-          onClick={() => setShowAll(true)}
+          className={`p-2 rounded-full bg-[#e5e5e5] text-[var(--brand)]${canGoLeft ? '' : ' opacity-50 cursor-not-allowed'}`}
+          onClick={() => canGoLeft && setStartIdx(startIdx - itemsPerPage)}
+          disabled={!canGoLeft}
+          aria-label="Previous"
         >
-          Show more
+          &#8592;
         </button>
-      )}
+        <button
+          className={`p-2 rounded-full bg-[#e5e5e5] text-[var(--brand)]${canGoRight ? '' : ' opacity-50 cursor-not-allowed'}`}
+          onClick={() => canGoRight && setStartIdx(startIdx + itemsPerPage)}
+          disabled={!canGoRight}
+          aria-label="Next"
+        >
+          &#8594;
+        </button>
+      </div>
     </div>
   );
 }
